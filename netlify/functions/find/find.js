@@ -1,11 +1,14 @@
+const fs = require('fs');
+
 exports.handler = async (event, context) => {
   const name = event.queryStringParameters.name;
   // go to the root of the project
   let animal
 
   try {
-    animal = require(`../../../data/${name.replace(' ', '_').toLowerCase()}.json`);
+    animal = fs.readFileSync(`./data/${name.replace(' ', '_').toLowerCase()}.json`);
   } catch (e) {
+    console.log(e)
     return {
       statusCode: 404,
       body: JSON.stringify({
@@ -16,6 +19,6 @@ exports.handler = async (event, context) => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify(animal)
+    body: JSON.stringify(JSON.parse(animal))
   };
 };

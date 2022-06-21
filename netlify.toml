@@ -4,6 +4,9 @@
   functions = "netlify/functions"
   publish = "."
 
+[functions]
+  included_files = ["data/**.json"]
+
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
   #[[redirects]]
